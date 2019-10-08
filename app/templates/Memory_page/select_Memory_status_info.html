@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% block breadcrumb %} 
+远程管理卡管理————内存状态信息页
+{% endblock %}
+{% block main %} 
+
+<div class="col-sm-12">
+{% if names == 'Default_space' %}
+    <table class="table table-striped table-bordered table-hover ">
+        <thead>
+            <tr>
+                {% for key_name in need_state %}
+                    <td align="center"> <font size="1"> {{key_name}} </td>
+                {%endfor%}
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                {% for x in names %}
+                     <td> </td>
+                {%endfor%}
+            </tr>
+        </tbody>
+    </table>
+
+
+{%else%}
+    <table class="table table-striped table-bordered table-hover " id="editable">
+    <thead>
+        <tr>
+            {% for key_name in names[0] %}
+                <td align="center"> <font size="1"> {{key_name}} </td>
+            {%endfor%}
+        </tr>
+    </thead>
+    <tbody>
+        {% for x in names %}
+            <tr>
+                {% for a,b in x.items() %}
+                    <td> <font size="1">{{ b }} </td>
+                {%endfor%}
+            </tr>
+        {%endfor%}
+     </tbody>
+    </table>
+{%endif%}
+
+<script>
+
+$('#editable').DataTable({
+        "bDestroy":false,
+        "bAutoWidth": false, 
+        "sScrollX": "100%",
+        "bPaginate": true,
+        "language": {
+                "lengthMenu": "每页 _MENU_ 条记录",
+                "zeroRecords": "没有找到记录",
+                "sInfo": "第 _PAGE_ 页 ( 总共 _PAGES_ 页 ),显示第 _START_ 至 _END_ 项(总共 _TOTAL_ 项)",
+                "infoEmpty": "无记录",
+                "infoFiltered": "(从 _MAX_ 条记录过滤)",
+                "sSearch": "搜索:",
+                "oPaginate": {
+                "sFirst": "首页",
+                "sPrevious": "上一页",
+                "sNext": "下一页",
+                "sLast": "末页"
+                } 
+        },
+        "order": [[ 0, "asc" ]] 
+});
+
+$('#juser').removeClass("active");
+$('#get_dell_racadm_Memory_info').addClass("active");
+$("#get_dell_racadm_Memory_info").children("ul").toggleClass("collapse"); 
+
+// $('#page_size').css('margin-top','-30px')
+// $('#page_size').css('margin-left','1px')
+// $('#page_size').height('900')
+
+
+</script>
+
+</div> <!--col-sm-12-->
+{% endblock %}
+

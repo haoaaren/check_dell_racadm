@@ -1,0 +1,230 @@
+<html><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit">
+
+<title>远程管理卡管理页面</title>
+
+<link rel="shortcut icon" href="/static/img/facio.ico" type="image/x-icon">
+<link href="/static/css/bootstrap.min.css" rel="stylesheet">
+<link href="/static/css/style.css" rel="stylesheet">
+
+<!--plugins-->
+<link href="/static/pulgin/Font-Awesome-4.6.3/css/font-awesome.min.css" rel="stylesheet">
+<link href="/static/pulgin/sweetalert-master/dist/sweetalert.css" rel="stylesheet">
+<link href="/static/pulgin/datatable/dataTables.min.css" rel="stylesheet">
+<link rel="stylesheet" href="/static/pulgin/multiselect/bootstrap-multiselect.css" type="text/css"/>
+
+<script src="/static/js/jquery-2.1.1.js"></script>
+
+<!--plugins-->
+<script src="/static/js/bootstrap.min.js"></script>
+<script src="/static/pulgin/sweetalert-master/dist/sweetalert.min.js"></script>        
+<script src="/static/pulgin/datatable/dataTables.min.js"></script>        
+<script src="/static/pulgin/multiselect/bootstrap-multiselect.js"></script>
+
+
+<!--整个页面的框架-->
+<div id="wrapper">
+        
+<!--左边导航-->
+<nav class="navbar-default navbar-static-side" role="navigation">
+<div class="sidebar-collapse">
+
+<ul class="nav" id="side-menu">            
+<!--左边栏头像部分-->
+<li class="nav-header">
+    <div class="dropdown profile-element">
+        <span>
+            <img alt="image" class="img-circle" width="48" height="48" src="/static/img/root.png">
+        </span>
+        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+            <span class="clear">
+                <span class="block m-t-xs">
+                    <strong class="font-bold">欢迎，{{info.username}}<span style="color: #8095a8"></span></strong>
+                </span>
+                <span class="text-muted text-xs block">
+                        {{ info.role }}
+                 </span>
+            </span>
+        </a>
+    </div>
+</li>
+<!--左边栏头像部分结束-->
+
+<!--左边菜单栏开始-->
+<li id="index">
+<a href="/"><i class="fa fa-gitlab"></i> <span class="nav-label">仪表盘</span><span class="label label-info pull-right"></span></a>
+</li>   <!--仪表盘-->
+           
+<li id="juser" class="active">
+<a href="#"><i class="fa fa-group"></i> <span class="nav-label">用户管理</span><span class="fa arrow"></span></a>
+   <ul class="nav nav-second-level collapse">
+        <li><a href="/">个人中心</a></li>
+        {% if info.role  == 'admin' %}
+        <li><a href="/userlist">用户列表</a></li>
+        {% endif %}
+   </ul>
+</li>   <!-- 用户管理 -->     
+
+<li id="get_dell_racadm_system_info">
+<a><i class="fa fa-inbox"></i> <span class="nav-label">系统</span><span class="fa arrow"></span></a>
+  <ul class="nav nav-second-level collapse">
+    <li><a href="/racadm_sytem_page">系统信息查看页</a></li>
+    <li><a href="/racadm_NIC_info_page">网卡信息页</a></li>
+  </ul>
+</li> <!-- 服务器日志备份记录 -->
+
+<li id="get_dell_racadm_CPU_info">
+<a><i class="fa fa-inbox"></i> <span class="nav-label">CPU</span><span class="fa arrow"></span></a>
+  <ul class="nav nav-second-level collapse">
+    <li><a href="/racadm_Cpu_info_page">CPU信息页</a></li>
+    <li><a href="/racadm_Cpu_status_info_page">CPU状态页</a></li>
+  </ul>
+</li> <!-- 服务器日志备份记录 -->
+
+<li id="get_dell_racadm_Memory_info">
+<a><i class="fa fa-inbox"></i> <span class="nav-label">内存</span><span class="fa arrow"></span></a>
+  <ul class="nav nav-second-level collapse">
+    <li><a href="/racadm_Memory_info_page">内存信息页</a></li>
+    <li><a href="/racadm_Memory_status_info_page">内存状态页</a></li>
+  </ul>
+</li> <!-- 服务器日志备份记录 -->
+
+<li id="get_dell_racadm_sensor_info">
+<a><i class="fa fa-inbox"></i> <span class="nav-label">传感器</span><span class="fa arrow"></span></a>
+  <ul class="nav nav-second-level collapse">
+    <li><a href="/racadm_Fan_status_info_page">风扇状态信息页</a></li>
+    <li><a href="/racadm_Temp_status_info_page">温度状态信息页</a></li>
+    <li><a href="/racadm_Power_status_info_page">电源状态信息页</a></li>
+    <li><a href="/racadm_Battery_status_info_page">电池状态信息页</a></li>
+  </ul>
+</li> <!-- 服务器日志备份记录 -->
+
+<li id="get_dell_racadm_disk_info">
+<a><i class="fa fa-inbox"></i> <span class="nav-label">磁盘</span><span class="fa arrow"></span></a>
+  <ul class="nav nav-second-level collapse">
+    <li><a href="/get_dell_racadm_disk_test">管理卡磁盘测试页</a></li>
+    <li><a href="/get_dell_racadm_info">磁盘信息查看页</a></li>
+    <li><a href="/get_dell_racadm_disk_status_page">磁盘状态汇总页</a></li>
+  </ul>
+</li> <!-- 服务器日志备份记录 -->
+
+<li id="api">
+<a href="#"><i class="fa fa-gears"></i> <span class="nav-label">第三方接口</span><span class="label label-info pull-right"></span></a>
+</li>    <!--第三方接口-->
+
+<li class="special_link">
+<a href="http://192.168.2.125/be_on_duty_tables" target="_blank"><i class="fa fa-database"></i> <span class="nav-label">访问官网</span></a>
+</li>  <!--link-->
+ 
+</ul> 
+</div>
+</nav>  <!--左边导航结束-->
+<!--左边导航点击自动弹出下拉菜单-->
+<script>
+$('li').click(function(){
+    $('li').removeClass("active");   
+    $(this).addClass("active");   
+})
+$('#juser').click(function(){
+    $("#juser").children("ul").toggleClass("collapse");   
+})
+$('#get_dell_racadm_CPU_info').click(function(){
+    $("#get_dell_racadm_CPU_info").children("ul").toggleClass("collapse");   
+})
+$('#get_dell_racadm_Memory_info').click(function(){
+    $("#get_dell_racadm_Memory_info").children("ul").toggleClass("collapse");   
+})
+$('#get_dell_racadm_disk_info').click(function(){
+    $("#get_dell_racadm_disk_info").children("ul").toggleClass("collapse");   
+})
+$('#get_dell_racadm_system_info').click(function(){
+    $("#get_dell_racadm_system_info").children("ul").toggleClass("collapse");   
+})
+$('#get_dell_racadm_sensor_info').click(function(){
+    $("#get_dell_racadm_sensor_info").children("ul").toggleClass("collapse");   
+})
+</script>
+
+<!--右边的整体-->
+<div id="page-wrapper" class="gray-bg">
+
+<!--右边导航第一层-->
+<div class="row border-botto">
+   <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+   <div class="navbar-header">
+       <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"> <i class="fa fa-bars"></i></a>
+    <form role="search" class="navbar-form-custom" method="get" action="">
+            <div class="form-group">
+                <input type="text" placeholder="输入搜索..." class="form-control" name="search" id="top-search">
+            </div>
+        </form> 
+    </div>
+    <ul class="nav navbar-top-links navbar-right">
+        <li>
+            <span class="m-r-sm text-muted welcome-message">Reboot自动化运维平台</span>
+        </li>
+        <li>
+            <a href="/logout/">
+                <i class="fa fa-sign-out"></i> Log out
+            </a>
+        </li> 
+    </ul>
+   </nav>
+</div>
+
+
+<!--右边第二层面包导航-->
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-12">
+     <br />
+        <ol class="breadcrumb">
+            <li>
+                <a href="/">仪表盘</a>
+            </li>
+            <li>
+                <a href="/">
+                {% block breadcrumb %}
+                {% endblock %}
+          
+                </a>
+            </li>
+        </ol>
+    </div>
+</div> <!--右边导航结束-->
+
+<!--正文部分分了三层-->
+<div class="wrapper wrapper-content">
+
+    <div class="row">
+        <div id="page_size" class="col-sm-12 border-bottom white-bg dashboard-header" style="margin-left:15px;height: 800px">
+                {% block main %}
+                {% endblock %}
+
+         </div>
+    </div>
+    <br>
+
+
+</div> <!--wrapper-content-->
+
+
+
+<!--页面尾部-->
+<div class="footer fixed">
+    <div class="pull-right">
+        Version <strong>0.3.1</strong> GPL.
+    </div>
+    <div>
+        <strong>Copyright</strong>Dell.inc
+    </div>
+</div>
+
+</div>  <!--page-wrapper-->
+</div>   <!--wrapper-->
+
+{% block js %}
+{% endblock %}
+
+</body></html>

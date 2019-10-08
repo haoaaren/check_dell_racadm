@@ -1,0 +1,36 @@
+<h1 align="center"> Tomcat upgrade list !</h1>
+<br />
+<table border="1">
+  <tr>
+    <td> IP地址 </td>
+    <td> 归属类 </td>
+    <td> </td>
+  </tr>
+  <tr>
+    <form action='/select' method="post">
+        <td> <input type='text' name='IP_addr'  > </td>
+        <td> <input type='text' name='ACL_type'> </td>
+        <td> <input type='submit' value='查找' > </td>
+    </form>
+  </tr>
+</table>
+
+<table border="1">
+    <thead>
+        <tr>
+        {% for key_name in names[0] %}
+                <td align="center"> {{key_name}} </td>
+        {%endfor%}
+        </tr>
+    </thead>
+    <tbody>
+        {% for x in names %}
+                 <tr>
+                    {% for a,b in x.items() %}
+                     <td> {{ b }} </td>
+
+                    {%endfor%}
+                </tr>
+        {%endfor%}
+    </tbody>
+</table>
